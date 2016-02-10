@@ -2,23 +2,15 @@
 #include <memory>
 #include <functional>
 
-class FlyWithWings
+static void flyWithWings()
 {
-public:
-    static void fly()
-    {
-        std::cout << "I'm flying!!" << std::endl;
-    }
-};
+    std::cout << "I'm flying!!" << std::endl;
+}
 
-class FlyNoWay
+static void flyNoWay()
 {
-public:
-    static void fly()
-    {
-        std::cout << "I can't fly" << std::endl;
-    }
-};
+    std::cout << "I can't fly" << std::endl;
+}
 
 class FlyWithRocket
 {
@@ -54,32 +46,20 @@ private:
 };
 
 
-class Quack
+static void quack()
 {
-public:
-    static void quack()
-    {
-        std::cout << "Quack" << std::endl;
-    }
-};
+    std::cout << "Quack" << std::endl;
+}
 
-class MuteQuack
+static void muteQuack()
 {
-public:
-    static void quack()
-    {
-        std::cout << "<< Silence >> " << std::endl;
-    }
-};
+    std::cout << "<< Silence >> " << std::endl;
+}
 
-class Squeak
+static void squeak()
 {
-public:
-    static void quack()
-    {
-        std::cout << "Squeak" << std::endl;
-    }
-};
+    std::cout << "Squeak" << std::endl;
+}
 
 
 class Duck
@@ -125,7 +105,7 @@ class MallardDuck : public Duck
 {
 public:
     MallardDuck()
-        : Duck(&Quack::quack, &FlyWithWings::fly)
+        : Duck(&quack, &flyWithWings)
     {
     }
 
@@ -139,7 +119,7 @@ class ModelDuck : public Duck
 {
 public:
     ModelDuck()
-        : Duck(&Quack::quack, &FlyNoWay::fly)
+        : Duck(&quack, &flyNoWay)
     {
     }
 
@@ -153,7 +133,7 @@ class RubberDuck : public Duck
 {
 public:
     RubberDuck()
-        : Duck(&MuteQuack::quack, FlyWithRocket())
+        : Duck(&muteQuack, FlyWithRocket())
     {}
 
     void display()
@@ -181,8 +161,4 @@ int main(void)
     d3.performFly();
     d3.performFly();
     d3.performFly();
-
-    //std::shared_ptr<FlyBehaviour> new_fb(new FlyRocketPowered());
-    //model->setFlyBehaviour(new_fb);
-    //model->performFly();
 }
